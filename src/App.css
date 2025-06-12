@@ -1,0 +1,149 @@
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  /* Remove or comment out max-width and margin: 0 auto */
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.accordion {
+  width: 100%;
+  max-width: 1200px;      /* Wider on desktop */
+  margin: 2rem auto 0 auto;        /* Center on desktop */
+  padding: 0 0.5rem;     /* Less horizontal padding */
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  .accordion {
+    max-width: 100%;     /* Full width on mobile */
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.accordion-item {
+  width: 100%;
+  margin: 0 0 12px 0;  /* Add 12px space below each accordion item */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.accordion-title {
+  width: 100%;
+  display: block;
+  text-align: left;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px;
+  border: none;
+  background: #eee;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.accordion-content {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background: #fafbfc;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.custom-btn {
+  padding: 8px 16px;
+  background: #e0e7ef;
+  border: 1px solid #bfcad6;
+  border-radius: 4px;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.custom-btn:hover {
+  background: #d0d8e8;
+}
+
+.top-banner {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #2d3e50;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem 0;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  z-index: 1000;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.playstore-link {
+  display: inline-block;
+}
+
+.playstore-badge {
+  height: 48px;
+  transition: transform 0.2s;
+}
+
+.playstore-badge:hover {
+  transform: scale(1.05);
+}
