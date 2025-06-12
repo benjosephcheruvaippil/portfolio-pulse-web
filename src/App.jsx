@@ -132,6 +132,43 @@ function App() {
                 />
               </div>
             )}
+
+            {item.title === 'Insurance' && openIndex === idx && (
+              <div className="insurance-grid">
+                <div>
+                  <label>Policy Name</label>
+                  <input type="text" placeholder="Policy Name" />
+                </div>
+                <div>
+                  <label>Provider</label>
+                  <input type="text" placeholder="Provider" />
+                </div>
+                <div>
+                  <label>Sum Assured</label>
+                  <input type="text" placeholder="Sum Assured" />
+                </div>
+                <div>
+                  <label>Premium</label>
+                  <input type="text" placeholder="Premium" />
+                </div>
+                <div>
+                  <label>Start Date</label>
+                  <input type="text" placeholder="Start Date" />
+                </div>
+                <div>
+                  <label>End Date</label>
+                  <input type="text" placeholder="End Date" />
+                </div>
+                <div>
+                  <label>Nominee</label>
+                  <input type="text" placeholder="Nominee" />
+                </div>
+                <div>
+                  <label>Type</label>
+                  <input type="text" placeholder="Type" />
+                </div>
+              </div>
+            )}
           </AccordionItem>
         ))}
       </div>
