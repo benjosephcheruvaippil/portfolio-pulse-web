@@ -5,6 +5,9 @@ function AccordionItem({ title, content, isOpen, onClick, children }) {
   return (
     <div className="accordion-item">
       <button className="accordion-title" onClick={onClick}>
+        <span style={{ marginRight: '1em', fontWeight: 'bold', fontSize: '1.2em' }}>
+          {isOpen ? '−' : '+'}
+        </span>
         {title}
       </button>
       {isOpen && (
