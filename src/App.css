@@ -147,3 +147,13 @@ body {
 .playstore-badge:hover {
   transform: scale(1.05);
 }
+
+.tagline {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #020b13;
+  margin-top: 5rem;    /* Enough space below the fixed banner */
+  margin-bottom: -5rem;   /* Less space before the accordion */
+  font-weight: 500;
+  letter-spacing: 1px;
+}

@@ -76,6 +76,9 @@ function App() {
       <header className="top-banner">
         Portfolio Pulse
       </header>
+      <div className="tagline">
+        Do a financial health checkup!
+      </div>
       <div className="accordion" style={{ paddingTop: '4.5rem' }}>
         {items.map((item, idx) => (
           <AccordionItem
