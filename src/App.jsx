@@ -79,10 +79,11 @@ function App() {
       <header className="top-banner">
         Portfolio Pulse
       </header>
+      <div className="main-scroll-area">
       <div className="tagline">
         Do a financial health checkup!
       </div>
-      <div className="accordion" style={{ paddingTop: '4.5rem' }}>
+      <div className="accordion">
         {items.map((item, idx) => (
           <AccordionItem
             key={idx}
@@ -149,6 +150,7 @@ function App() {
           />
         </a>
       </footer>
+      </div>
     </>
   )
 }

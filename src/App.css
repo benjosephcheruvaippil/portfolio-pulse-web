@@ -1,3 +1,11 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent page scrollbar */
+}
+
 #root {
   margin: 0;
   padding: 0;
@@ -126,6 +134,19 @@ body {
   z-index: 1000;
 }
 
+.main-scroll-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Height = 100% - banner height (adjust as needed) */
+  height: 100vh;
+  padding-top: 4.5rem; /* Same as .top-banner height */
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: #fff;
+}
+
 .footer {
   width: 100%;
   display: flex;
@@ -152,8 +173,8 @@ body {
   text-align: center;
   font-size: 1.2rem;
   color: #020b13;
-  margin-top: 5rem;    /* Enough space below the fixed banner */
-  margin-bottom: -5rem;   /* Less space before the accordion */
+  margin-top: 1.5rem;   /* This should match or slightly exceed .top-banner height */
+  margin-bottom: 0.5rem;
   font-weight: 500;
   letter-spacing: 1px;
 }
