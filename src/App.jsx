@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
 
-function AccordionItem({ title, content, isOpen, onClick, children }) {
+function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
     <div className="accordion-item">
       <button className="accordion-title" onClick={onClick}>
         <span style={{ marginRight: '1em', fontWeight: 'bold', fontSize: '1.2em' }}>
           {isOpen ? '−' : '+'}
+        </span>
+        <span style={{ marginRight: '0.7em', fontSize: '1.2em', display: 'inline-flex', alignItems: 'center' }}>
+          {icon}
         </span>
         {title}
       </button>
@@ -28,12 +32,12 @@ function App() {
   const [success, setSuccess] = useState(false)
 
   const items = [
-    { title: 'Personal Details', content: '' },
-    { title: 'Income', content: '' },
-    { title: 'Expenses', content: '' },
-    { title: 'Investments', content: '' },
-    { title: 'Insurance', content: '' },
-    { title: 'Results', content: '' }
+    { title: 'Personal Details', icon: <FaUser />, content: '' },
+    { title: 'Income', icon: <FaMoneyBillWave />, content: '' },
+    { title: 'Expenses', icon: <FaWallet />, content: '' },
+    { title: 'Investments', icon: <FaChartLine />, content: '' },
+    { title: 'Insurance', icon: <FaShieldAlt />, content: '' },
+    { title: 'Results', icon: <FaCheckCircle />, content: '' }
   ]
 
   // Call POST API on page load
@@ -88,6 +92,7 @@ function App() {
           <AccordionItem
             key={idx}
             title={item.title}
+            icon={item.icon}
             content={item.content}
             isOpen={openIndex === idx}
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
