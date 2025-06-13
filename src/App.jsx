@@ -133,6 +133,27 @@ function App() {
               </div>
             )}
 
+            {item.title === 'Expenses' && openIndex === idx && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2em', marginTop: '1em', maxWidth: 400 }}>
+                <div>
+                  <label>Monthly EMI that you pay</label>
+                  <input
+                    type="text"
+                    placeholder="Enter EMI amount"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
+                </div>
+                <div>
+                  <label>Average monthly savings</label>
+                  <input
+                    type="text"
+                    placeholder="Enter savings amount"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
+                </div>
+              </div>
+            )}
+
             {item.title === 'Insurance' && openIndex === idx && (
               <div className="insurance-grid">
                 <div>
