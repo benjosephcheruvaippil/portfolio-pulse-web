@@ -55,6 +55,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   width: 100%;
+  color: #222;
+  background: #fff;
 }
 
 .accordion {
@@ -91,6 +93,7 @@ body {
   background: #eee;
   font-size: 1rem;
   cursor: pointer;
+  color: #222; /* Added color property */
 }
 
 .accordion-content {
@@ -101,6 +104,7 @@ body {
   background: #fafbfc;
   padding: 20px;
   margin-top: 8px;
+  color: #222; /* Added color property */
 }
 
 .custom-btn {
