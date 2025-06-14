@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 
 function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
@@ -153,6 +153,35 @@ function App() {
                   <input
                     type="text"
                     placeholder="Enter savings amount"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {item.title === 'Investments' && openIndex === idx && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2em', marginTop: '1em', maxWidth: 400 }}>
+                <div style={{ position: 'relative' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                    Total Liquid Assets value
+                    <span className="info-icon" tabIndex={0}>
+                      <FaInfoCircle />
+                      <span className="tooltip">
+                        This includes cash deposit, mutual fund, bonds etc.
+                      </span>
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter total liquid assets"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
+                </div>
+                <div>
+                  <label>Property/House assets value</label>
+                  <input
+                    type="text"
+                    placeholder="Enter property/house assets value"
                     style={{ padding: '8px', width: '100%' }}
                   />
                 </div>
