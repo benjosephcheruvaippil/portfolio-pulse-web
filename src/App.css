@@ -201,3 +201,15 @@ body {
   padding: 8px;
   box-sizing: border-box;
 }
+
+input,
+input[type="text"],
+input[type="email"] {
+  color: #444;           /* or #555, #666, etc. */
+  background: #fff;      /* ensure background is light */
+}
+
+input::placeholder {
+  color: #aaa;           /* light gray for placeholder */
+  opacity: 1;
+}
