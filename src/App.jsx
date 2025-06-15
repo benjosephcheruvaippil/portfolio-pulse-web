@@ -27,6 +27,7 @@ function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
 function App() {
   const [openIndex, setOpenIndex] = useState(null)
   const [email, setEmail] = useState('')
+  const [incomeAmount, setIncomeAmount] = useState('');
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
@@ -95,7 +96,19 @@ function App() {
             icon={item.icon}
             content={item.content}
             isOpen={openIndex === idx}
-            onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+            onClick={() => {
+              // Prevent opening "Income" if email is empty
+              if (item.title === 'Income' && !email) {
+                alert('Please enter your email before proceeding to Income.');
+                return;
+              }
+              // Prevent opening "Expenses" if incomeAmount is empty
+              if (item.title === 'Expenses' && !incomeAmount) {
+                alert('Please enter your income before proceeding to Expenses.');
+                return;
+              }
+              setOpenIndex(openIndex === idx ? null : idx);
+            }}
           >
             {item.title === 'Personal Details' && openIndex === idx && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'flex-start' }}>
@@ -131,9 +144,8 @@ function App() {
                   pattern="[0-9]*"
                   placeholder="Amount"
                   style={{ padding: '8px', width: '120px' }}
-                  onInput={e => {
-                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                  }}
+                  value={incomeAmount}
+                  onChange={e => setIncomeAmount(e.target.value.replace(/[^0-9]/g, ''))}
                 />
               </div>
             )}
