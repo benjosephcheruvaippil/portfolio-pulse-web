@@ -25,7 +25,7 @@ function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
 }
 
 function App() {
-  const [openIndex, setOpenIndex] = useState(null)
+  const [openIndex, setOpenIndex] = useState(0)
   const [email, setEmail] = useState('')
   const [incomeAmount, setIncomeAmount] = useState('');
   const [loading, setLoading] = useState(false)
@@ -136,17 +136,31 @@ function App() {
             )}
 
             {item.title === 'Income' && openIndex === idx && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-                <span>My monthly income is</span>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  placeholder="Amount"
-                  style={{ padding: '8px', width: '120px' }}
-                  value={incomeAmount}
-                  onChange={e => setIncomeAmount(e.target.value.replace(/[^0-9]/g, ''))}
-                />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2em', alignItems: 'flex-start' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                  <span>My monthly income is</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    placeholder="Amount"
+                    style={{ padding: '8px', width: '120px' }}
+                    value={incomeAmount}
+                    onChange={e => setIncomeAmount(e.target.value.replace(/[^0-9]/g, ''))}
+                  />
+                </div>
+                <button
+                  className="custom-btn"
+                  onClick={() => {
+                    if (!incomeAmount) {
+                      alert('Please enter your income before proceeding to Expenses.');
+                      return;
+                    }
+                    setOpenIndex(2); // Assuming "Expenses" is at index 2
+                  }}
+                >
+                  Let's check your expenses
+                </button>
               </div>
             )}
 
@@ -168,6 +182,13 @@ function App() {
                     style={{ padding: '8px', width: '100%' }}
                   />
                 </div>
+                <button
+                  className="custom-btn"
+                  style={{ alignSelf: 'flex-start' }}
+                  onClick={() => setOpenIndex(3)} // Assuming "Investments" is at index 3
+                >
+                  Time to add your investments!
+                </button>
               </div>
             )}
 
@@ -179,7 +200,7 @@ function App() {
                     <span className="info-icon" tabIndex={0}>
                       <FaInfoCircle />
                       <span className="tooltip">
-                        This includes cash deposit, mutual fund, bonds etc.
+                        This includes cash deposits, mutual funds, stocks, bonds, gold, etc.(Assets that can be converted to cash typically in less than a week)
                       </span>
                     </span>
                   </label>
@@ -201,38 +222,24 @@ function App() {
             )}
 
             {item.title === 'Insurance' && openIndex === idx && (
-              <div className="insurance-grid">
-                <div>
-                  <label>Policy Name</label>
-                  <input type="text" placeholder="Policy Name" />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2em', marginTop: '1em', maxWidth: 400 }}>
+                <div style={{ position: 'relative' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                    Health Insurance Coverage
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Total Sum Insured"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
                 </div>
                 <div>
-                  <label>Provider</label>
-                  <input type="text" placeholder="Provider" />
-                </div>
-                <div>
-                  <label>Sum Assured</label>
-                  <input type="text" placeholder="Sum Assured" />
-                </div>
-                <div>
-                  <label>Premium</label>
-                  <input type="text" placeholder="Premium" />
-                </div>
-                <div>
-                  <label>Start Date</label>
-                  <input type="text" placeholder="Start Date" />
-                </div>
-                <div>
-                  <label>End Date</label>
-                  <input type="text" placeholder="End Date" />
-                </div>
-                <div>
-                  <label>Nominee</label>
-                  <input type="text" placeholder="Nominee" />
-                </div>
-                <div>
-                  <label>Type</label>
-                  <input type="text" placeholder="Type" />
+                  <label>Term Insurance Coverage</label>
+                  <input
+                    type="text"
+                    placeholder="Totam Sum Assured"
+                    style={{ padding: '8px', width: '100%' }}
+                  />
                 </div>
               </div>
             )}
