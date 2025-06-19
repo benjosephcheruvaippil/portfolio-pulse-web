@@ -43,7 +43,7 @@ function App() {
 
   // Call POST API on page load
   useEffect(() => {
-    fetch('http://localhost:5226/api/General/saveUserInfo', {
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/saveUserInfo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
