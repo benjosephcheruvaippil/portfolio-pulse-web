@@ -74,6 +74,30 @@ function App() {
     setOpenIndex(1)
   }
 
+  const handleSeeResult = () => {
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/calculateResult', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        // Add your payload here, for example:
+        email,
+        incomeAmount,
+        // ...add other fields as needed
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the API response if needed
+        console.log('Result API response:', data);
+        setOpenIndex(5); // Open the Results accordion
+      })
+      .catch(error => {
+        // Handle errors if needed
+        console.error('Error calling results API:', error);
+        setOpenIndex(5); // Still open Results accordion on error
+      });
+  };
+
   return (
     <>
       <header className="top-banner">
@@ -213,6 +237,13 @@ function App() {
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
+                  <button
+                    className="custom-btn"
+                    style={{ alignSelf: 'flex-start' }}
+                    onClick={() => setOpenIndex(4)} // Assuming "Investments" is at index 3
+                  >
+                    Continue
+                  </button>
                 </div>
               )}
 
@@ -235,6 +266,77 @@ function App() {
                       placeholder="Totam Sum Assured"
                       style={{ padding: '8px', width: '100%' }}
                     />
+                  </div>
+                  <button
+                    className="custom-btn"
+                    style={{ alignSelf: 'flex-start' }}
+                    onClick={handleSeeResult}
+                  >
+                    See Result!
+                  </button>
+                </div>
+              )}
+
+               {item.title === 'Results' && openIndex === idx && (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2em',
+                    marginTop: '1em',
+                    maxWidth: 400,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center', // Center text
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      background: '#f5f8fa',
+                      borderRadius: '1em',
+                      padding: '2em 1em',
+                      width: '100%',
+                      boxShadow: '0 2px 8px rgba(44,62,80,0.08)'
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '2.5rem',
+                        fontWeight: 'bold',
+                        color: '#0074d9',
+                        marginBottom: '0.5em'
+                      }}
+                    >
+                      60<span style={{ fontSize: '1.2rem', color: '#888' }}>/100</span>
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '1.1rem',
+                        color: '#222',
+                        fontWeight: 500
+                      }}
+                    >
+                      Your Financial Health Score
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      background: '#fffbe6',
+                      borderLeft: '4px solid #ffb400',
+                      borderRadius: '0.5em',
+                      padding: '1em',
+                      width: '100%',
+                      fontSize: '1rem',
+                      color: '#444',
+                      textAlign: 'center' // Center text in summary
+                    }}
+                  >
+                    <strong>Summary:</strong> You have a good savings habit and manageable EMIs, but your insurance coverage is below recommended levels. Consider increasing your term and health insurance for better protection.
                   </div>
                 </div>
               )}
