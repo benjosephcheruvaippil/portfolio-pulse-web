@@ -91,22 +91,21 @@ function App() {
       body: JSON.stringify({
         emailId: '',
         userAge: Number(age),
-        monthlyIncome: Number(incomeAmount),
-        monthlyEMI: Number(monthlyEMI),
-        monthlyOtherExpenses: Number(otherMonthlyExpenses),
-        averageMonthlySavings: Number(averageMonthlySavings),
-        liquidAssetsValue: Number(liquidAssets),
-        realEstateValue: Number(propertyAssets),
-        healthInsuranceCoverageValue: Number(healthInsurance),
-        termInsuranceValue: Number(termInsurance)
+        monthlyIncome: Number(incomeAmount.replace(/,/g, '')),
+        monthlyEMI: Number(monthlyEMI.replace(/,/g, '')),
+        monthlyOtherExpenses: Number(otherMonthlyExpenses.replace(/,/g, '')),
+        averageMonthlySavings: Number(averageMonthlySavings.replace(/,/g, '')),
+        liquidAssetsValue: Number(liquidAssets.replace(/,/g, '')),
+        realEstateValue: Number(propertyAssets.replace(/,/g, '')),
+        healthInsuranceCoverageValue: Number(healthInsurance.replace(/,/g, '')),
+        termInsuranceValue: Number(termInsurance.replace(/,/g, ''))
       }),
     })
       .then(response => response.json())
       .then(data => {
         // Handle the API response if needed
-        console.log('Result API response:', data);
-        setFinancialHealthScore(data.financialHealthScore); // Assuming the API returns a 'score' field
-        setResultMessage(data.message); // Assuming the API returns a 'message' field
+        setFinancialHealthScore(data.financialHealthScore);
+        setResultMessage(data.message);
         setOpenIndex(4); // Open the Results accordion
       })
       .catch(error => {
@@ -138,6 +137,45 @@ function App() {
     setTermInsuranceAmount('');
     setLocation('');
   };
+
+  function formatCurrency(value) {
+    if (!value) return '';
+    let number = Number(value.toString().replace(/[^0-9.]/g, ''));
+    if (isNaN(number)) return '';
+    if (location === 'India') {
+      return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(number);
+    } else if (location === 'US/Europe') {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(number);
+    }
+    return value;
+  }
+
+  function formatNumberWithCommas(value) {
+    if (!value) return '';
+    let number = value.toString().replace(/[^0-9.]/g, '');
+    if (!number) return '';
+    if (location === 'India') {
+      // Indian numbering system
+      const parts = number.split('.');
+      let integerPart = parts[0];
+      let lastThree = integerPart.substring(integerPart.length - 3);
+      let otherNumbers = integerPart.substring(0, integerPart.length - 3);
+      if (otherNumbers !== '') {
+        lastThree = ',' + lastThree;
+      }
+      let formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+      if (parts.length > 1) {
+        formatted += '.' + parts[1];
+      }
+      return formatted;
+    } else if (location === 'US/Europe') {
+      // US/Europe numbering system
+      const parts = number.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join('.');
+    }
+    return number;
+  }
 
   return (
     <>
@@ -254,7 +292,23 @@ function App() {
                       type="text"
                       placeholder="Enter EMI amount"
                       value={monthlyEMI}
-                      onChange={e => { localStorage.setItem('monthlyEMI', e.target.value); setMonthlyEMIAmount(e.target.value); }}
+                      onChange={e => {
+                        // Only allow numbers and dot
+                        const raw = e.target.value.replace(/[^0-9.]/g, '');
+                        setMonthlyEMIAmount(raw);
+                        localStorage.setItem('monthlyEMI', raw);
+                      }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = monthlyEMI.replace(/,/g, '');
+                        setMonthlyEMIAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(monthlyEMI);
+                        setMonthlyEMIAmount(formatted);
+                        localStorage.setItem('monthlyEMI', formatted);
+                      }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
