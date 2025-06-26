@@ -40,6 +40,7 @@ function App() {
   const [success, setSuccess] = useState(false)
   const [financialHealthScore, setFinancialHealthScore] = useState(null);
   const [resultMessage, setResultMessage] = useState('');
+  const [location, setLocation] = useState(localStorage.getItem('location') || '');
 
   const items = [
     { title: 'Personal Details', icon: <FaUser />, content: '' },
@@ -125,6 +126,7 @@ function App() {
     localStorage.removeItem('propertyAssets');
     localStorage.removeItem('healthInsurance');
     localStorage.removeItem('termInsurance');
+    localStorage.removeItem('location');
     setAge('');
     setIncomeAmount('');
     setMonthlyEMIAmount('');
@@ -134,6 +136,7 @@ function App() {
     setPropertyAssetsAmount('');
     setHealthInsuranceAmount('');
     setTermInsuranceAmount('');
+    setLocation('');
   };
 
   return (
@@ -173,27 +176,41 @@ function App() {
               }}
             >
               {item.title === 'Personal Details' && openIndex === idx && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'flex-start' }}>
-                  <input
-                    type="text"
-                    placeholder="Please enter your age"
-                    value={age}
-                    onChange={e => {
-                      setAge(e.target.value);
-                      localStorage.setItem('age', e.target.value);
-                    }}
-                    style={{ padding: '8px', width: '250px' }}
-                  />
-
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em', marginTop: '1em', maxWidth: 400 }}>
+                  <div style={{ width: '50%' }}>
+                    <label style={{ display: 'block', marginBottom: '0.2em' }}>Currency Format</label>
+                    <select
+                      value={location}
+                      onChange={e => {
+                        setLocation(e.target.value);
+                        localStorage.setItem('location', e.target.value);
+                      }}
+                      style={{ padding: '8px', width: '100%' }}
+                    >
+                      <option value="">Select</option>
+                      <option value="India">India</option>
+                      <option value="US/Europe">US/Europe</option>
+                    </select>
+                  </div>
+                  <div style={{ width: '50%' }}>
+                    <label style={{ display: 'block', marginBottom: '0.2em' }}>Age</label>
+                    <input
+                      type="text"
+                      placeholder="Please enter your age"
+                      value={age}
+                      onChange={e => {
+                        setAge(e.target.value);
+                        localStorage.setItem('age', e.target.value);
+                      }}
+                      style={{ padding: '8px', width: '100%' }}
+                    />
+                  </div>
                   <button className="custom-btn" onClick={handleContinue} disabled={loading}>
                     {loading ? 'Saving...' : 'Continue'}
                   </button>
-
                   {error && <span style={{ color: 'red' }}>{error}</span>}
-                  {success && <span style={{ color: 'green' }}>Email saved!</span>}
-
-                  <label>Or</label>
-
+                  {success && <span style={{ color: 'green' }}>{success}</span>}
+                  <label style={{ marginTop: '1em' }}>Or</label>
                   <button className="custom-btn" onClick={handleClearAllData}>
                     Clear All Data
                   </button>
