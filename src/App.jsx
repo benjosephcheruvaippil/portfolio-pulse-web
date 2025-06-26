@@ -26,15 +26,24 @@ function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
 
 function App() {
   const [openIndex, setOpenIndex] = useState(0)
-  const [email, setEmail] = useState('')
+  const [age, setAge] = useState('')
   const [incomeAmount, setIncomeAmount] = useState('');
+  const [monthlyEMI, setMonthlyEMIAmount] = useState('');
+  const [otherMonthlyExpenses, setOtherMonthlyExpensesAmount] = useState('');
+  const [averageMonthlySavings, setAverageMonthlySavingsAmount] = useState('');
+  const [liquidAssets, setLiquidAssetsAmount] = useState('');
+  const [propertyAssets, setPropertyAssetsAmount] = useState('');
+  const [healthInsurance, setHealthInsuranceAmount] = useState('');
+  const [termInsurance, setTermInsuranceAmount] = useState('');
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
+  const [financialHealthScore, setFinancialHealthScore] = useState(null);
+  const [resultMessage, setResultMessage] = useState('');
 
   const items = [
     { title: 'Personal Details', icon: <FaUser />, content: '' },
-    { title: 'Income', icon: <FaMoneyBillWave />, content: '' },
+    // { title: 'Income', icon: <FaMoneyBillWave />, content: '' },
     { title: 'Expenses', icon: <FaWallet />, content: '' },
     { title: 'Investments', icon: <FaChartLine />, content: '' },
     { title: 'Insurance', icon: <FaShieldAlt />, content: '' },
@@ -56,20 +65,20 @@ function App() {
 
   // Replace the URL with your actual API endpoint
   const handleContinue = () => {
-    fetch('https://api.restful-api.dev/objects', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: 'Windows lap',
-        data: {
-          year: 2019,
-          price: 1849.99,
-          "CPU model": "Intel Core i9",
-          "Hard disk size": "1 TB",
-          "Email": email,
-        },
-      }),
-    })
+    // fetch('https://api.restful-api.dev/objects', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({
+    //     name: 'Windows lap',
+    //     data: {
+    //       year: 2019,
+    //       price: 1849.99,
+    //       "CPU model": "Intel Core i9",
+    //       "Hard disk size": "1 TB",
+    //       "Email": age,
+    //     },
+    //   }),
+    // })
     // Open the "Income" tab (index 1)
     setOpenIndex(1)
   }
@@ -79,22 +88,30 @@ function App() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        // Add your payload here, for example:
-        email,
-        incomeAmount,
-        // ...add other fields as needed
+        emailId: '',
+        userAge: age,
+        monthlyIncome: incomeAmount,
+        monthlyEMI: monthlyEMI,
+        monthlyOtherExpenses: otherMonthlyExpenses,
+        averageMonthlySavings: averageMonthlySavings,
+        liquidAssetsValue: liquidAssets,
+        realEstateValue: propertyAssets,
+        healthInsuranceCoverageValue: healthInsurance,
+        termInsuranceValue: termInsurance
       }),
     })
       .then(response => response.json())
       .then(data => {
         // Handle the API response if needed
         console.log('Result API response:', data);
-        setOpenIndex(5); // Open the Results accordion
+        setFinancialHealthScore(data.financialHealthScore); // Assuming the API returns a 'score' field
+        setResultMessage(data.message); // Assuming the API returns a 'message' field
+        setOpenIndex(4); // Open the Results accordion
       })
       .catch(error => {
         // Handle errors if needed
         console.error('Error calling results API:', error);
-        setOpenIndex(5); // Still open Results accordion on error
+        setOpenIndex(4); // Still open Results accordion on error
       });
   };
 
@@ -117,13 +134,18 @@ function App() {
               isOpen={openIndex === idx}
               onClick={() => {
                 // Prevent opening "Income" if email is empty
-                if (item.title === 'Income' && !email) {
+                if (item.title === 'Income' && !age) {
                   alert('Please enter your email before proceeding to Income.');
                   return;
                 }
                 // Prevent opening "Expenses" if incomeAmount is empty
-                if (item.title === 'Expenses' && !incomeAmount) {
-                  alert('Please enter your income before proceeding to Expenses.');
+                // if (item.title === 'Expenses' && !incomeAmount) {
+                //   alert('Please enter your income before proceeding to Expenses.');
+                //   return;
+                // }
+                // Prevent opening "Results" except via See Result! button
+                if (item.title === 'Results') {
+                  alert('Please click on "See Result!" under Insurance to view your financial health score.');
                   return;
                 }
                 setOpenIndex(openIndex === idx ? null : idx);
@@ -132,10 +154,10 @@ function App() {
               {item.title === 'Personal Details' && openIndex === idx && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'flex-start' }}>
                   <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Please enter your age"
+                    value={age}
+                    onChange={e => setAge(e.target.value)}
                     style={{ padding: '8px', width: '250px' }}
                   />
 
@@ -175,7 +197,7 @@ function App() {
                         alert('Please enter your income before proceeding to Expenses.');
                         return;
                       }
-                      setOpenIndex(2); // Assuming "Expenses" is at index 2
+                      setOpenIndex(1); // Assuming "Expenses" is at index 2
                     }}
                   >
                     Let's check your expenses
@@ -190,6 +212,18 @@ function App() {
                     <input
                       type="text"
                       placeholder="Enter EMI amount"
+                      value={monthlyEMI}
+                      onChange={e => setMonthlyEMIAmount(e.target.value)}
+                      style={{ padding: '8px', width: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <label>Other Monthly Expenses</label>
+                    <input
+                      type="text"
+                      placeholder="Enter other expenses"
+                      value={otherMonthlyExpenses}
+                      onChange={e => setOtherMonthlyExpensesAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -198,13 +232,15 @@ function App() {
                     <input
                       type="text"
                       placeholder="Enter savings amount"
+                      value={averageMonthlySavings}
+                      onChange={e => setAverageMonthlySavingsAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
                   <button
                     className="custom-btn"
                     style={{ alignSelf: 'flex-start' }}
-                    onClick={() => setOpenIndex(3)} // Assuming "Investments" is at index 3
+                    onClick={() => setOpenIndex(2)} // Assuming "Investments" is at index 3
                   >
                     Time to add your investments!
                   </button>
@@ -226,6 +262,8 @@ function App() {
                     <input
                       type="text"
                       placeholder="Enter total liquid assets"
+                      value={liquidAssets}
+                      onChange={e => setLiquidAssetsAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -234,13 +272,15 @@ function App() {
                     <input
                       type="text"
                       placeholder="Enter property/house assets value"
+                      value={propertyAssets}
+                      onChange={e => setPropertyAssetsAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
                   <button
                     className="custom-btn"
                     style={{ alignSelf: 'flex-start' }}
-                    onClick={() => setOpenIndex(4)} // Assuming "Investments" is at index 3
+                    onClick={() => setOpenIndex(3)} // Assuming "Investments" is at index 3
                   >
                     Continue
                   </button>
@@ -256,6 +296,8 @@ function App() {
                     <input
                       type="text"
                       placeholder="Total Sum Insured"
+                      value={healthInsurance}
+                      onChange={e => setHealthInsuranceAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -264,6 +306,8 @@ function App() {
                     <input
                       type="text"
                       placeholder="Totam Sum Assured"
+                      value={termInsurance}
+                      onChange={e => setTermInsuranceAmount(e.target.value)}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -277,7 +321,7 @@ function App() {
                 </div>
               )}
 
-               {item.title === 'Results' && openIndex === idx && (
+              {item.title === 'Results' && openIndex === idx && (
                 <div
                   style={{
                     display: 'flex',
@@ -312,7 +356,7 @@ function App() {
                         marginBottom: '0.5em'
                       }}
                     >
-                      60<span style={{ fontSize: '1.2rem', color: '#888' }}>/100</span>
+                      {financialHealthScore}<span style={{ fontSize: '1.2rem', color: '#888' }}>/100</span>
                     </span>
                     <span
                       style={{
@@ -336,7 +380,7 @@ function App() {
                       textAlign: 'center' // Center text in summary
                     }}
                   >
-                    <strong>Summary:</strong> You have a good savings habit and manageable EMIs, but your insurance coverage is below recommended levels. Consider increasing your term and health insurance for better protection.
+                    <strong>Summary:</strong> {resultMessage}
                   </div>
                 </div>
               )}
