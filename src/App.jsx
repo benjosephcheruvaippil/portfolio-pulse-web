@@ -26,15 +26,15 @@ function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
 
 function App() {
   const [openIndex, setOpenIndex] = useState(0)
-  const [age, setAge] = useState('')
-  const [incomeAmount, setIncomeAmount] = useState('');
-  const [monthlyEMI, setMonthlyEMIAmount] = useState('');
-  const [otherMonthlyExpenses, setOtherMonthlyExpensesAmount] = useState('');
-  const [averageMonthlySavings, setAverageMonthlySavingsAmount] = useState('');
-  const [liquidAssets, setLiquidAssetsAmount] = useState('');
-  const [propertyAssets, setPropertyAssetsAmount] = useState('');
-  const [healthInsurance, setHealthInsuranceAmount] = useState('');
-  const [termInsurance, setTermInsuranceAmount] = useState('');
+  const [age, setAge] = useState(localStorage.getItem('age') || '');
+  const [incomeAmount, setIncomeAmount] = useState(localStorage.getItem('incomeAmount') || '');
+  const [monthlyEMI, setMonthlyEMIAmount] = useState(localStorage.getItem('monthlyEMI') || '');
+  const [otherMonthlyExpenses, setOtherMonthlyExpensesAmount] = useState(localStorage.getItem('otherMonthlyExpenses') || '');
+  const [averageMonthlySavings, setAverageMonthlySavingsAmount] = useState(localStorage.getItem('averageMonthlySavings') || '');
+  const [liquidAssets, setLiquidAssetsAmount] = useState(localStorage.getItem('liquidAssets') || '');
+  const [propertyAssets, setPropertyAssetsAmount] = useState(localStorage.getItem('propertyAssets') || '');
+  const [healthInsurance, setHealthInsuranceAmount] = useState(localStorage.getItem('healthInsurance') || '');
+  const [termInsurance, setTermInsuranceAmount] = useState(localStorage.getItem('termInsurance') || '');
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
@@ -89,15 +89,15 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         emailId: '',
-        userAge: age,
-        monthlyIncome: incomeAmount,
-        monthlyEMI: monthlyEMI,
-        monthlyOtherExpenses: otherMonthlyExpenses,
-        averageMonthlySavings: averageMonthlySavings,
-        liquidAssetsValue: liquidAssets,
-        realEstateValue: propertyAssets,
-        healthInsuranceCoverageValue: healthInsurance,
-        termInsuranceValue: termInsurance
+        userAge: Number(age),
+        monthlyIncome: Number(incomeAmount),
+        monthlyEMI: Number(monthlyEMI),
+        monthlyOtherExpenses: Number(otherMonthlyExpenses),
+        averageMonthlySavings: Number(averageMonthlySavings),
+        liquidAssetsValue: Number(liquidAssets),
+        realEstateValue: Number(propertyAssets),
+        healthInsuranceCoverageValue: Number(healthInsurance),
+        termInsuranceValue: Number(termInsurance)
       }),
     })
       .then(response => response.json())
@@ -157,7 +157,10 @@ function App() {
                     type="text"
                     placeholder="Please enter your age"
                     value={age}
-                    onChange={e => setAge(e.target.value)}
+                    onChange={e => {
+                      setAge(e.target.value);
+                      localStorage.setItem('age', e.target.value);
+                    }}
                     style={{ padding: '8px', width: '250px' }}
                   />
 
@@ -187,7 +190,7 @@ function App() {
                       placeholder="Amount"
                       style={{ padding: '8px', width: '120px' }}
                       value={incomeAmount}
-                      onChange={e => setIncomeAmount(e.target.value.replace(/[^0-9]/g, ''))}
+                      onChange={e => { localStorage.setItem('incomeAmount', e.target.value); setIncomeAmount(e.target.value.replace(/[^0-9]/g, '')); }}
                     />
                   </div>
                   <button
@@ -213,7 +216,7 @@ function App() {
                       type="text"
                       placeholder="Enter EMI amount"
                       value={monthlyEMI}
-                      onChange={e => setMonthlyEMIAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('monthlyEMI', e.target.value); setMonthlyEMIAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -223,7 +226,7 @@ function App() {
                       type="text"
                       placeholder="Enter other expenses"
                       value={otherMonthlyExpenses}
-                      onChange={e => setOtherMonthlyExpensesAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('otherMonthlyExpenses', e.target.value); setOtherMonthlyExpensesAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -233,7 +236,7 @@ function App() {
                       type="text"
                       placeholder="Enter savings amount"
                       value={averageMonthlySavings}
-                      onChange={e => setAverageMonthlySavingsAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('averageMonthlySavings', e.target.value); setAverageMonthlySavingsAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -263,7 +266,7 @@ function App() {
                       type="text"
                       placeholder="Enter total liquid assets"
                       value={liquidAssets}
-                      onChange={e => setLiquidAssetsAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('liquidAssets', e.target.value); setLiquidAssetsAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -273,7 +276,7 @@ function App() {
                       type="text"
                       placeholder="Enter property/house assets value"
                       value={propertyAssets}
-                      onChange={e => setPropertyAssetsAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('propertyAssets', e.target.value); setPropertyAssetsAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -297,7 +300,7 @@ function App() {
                       type="text"
                       placeholder="Total Sum Insured"
                       value={healthInsurance}
-                      onChange={e => setHealthInsuranceAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('healthInsurance', e.target.value); setHealthInsuranceAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -307,7 +310,7 @@ function App() {
                       type="text"
                       placeholder="Totam Sum Assured"
                       value={termInsurance}
-                      onChange={e => setTermInsuranceAmount(e.target.value)}
+                      onChange={e => { localStorage.setItem('termInsurance', e.target.value); setTermInsuranceAmount(e.target.value); }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
