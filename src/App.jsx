@@ -115,6 +115,27 @@ function App() {
       });
   };
 
+  const handleClearAllData = () => {
+    localStorage.removeItem('age');
+    localStorage.removeItem('incomeAmount');
+    localStorage.removeItem('monthlyEMI');
+    localStorage.removeItem('otherMonthlyExpenses');
+    localStorage.removeItem('averageMonthlySavings');
+    localStorage.removeItem('liquidAssets');
+    localStorage.removeItem('propertyAssets');
+    localStorage.removeItem('healthInsurance');
+    localStorage.removeItem('termInsurance');
+    setAge('');
+    setIncomeAmount('');
+    setMonthlyEMIAmount('');
+    setOtherMonthlyExpensesAmount('');
+    setAverageMonthlySavingsAmount('');
+    setLiquidAssetsAmount('');
+    setPropertyAssetsAmount('');
+    setHealthInsuranceAmount('');
+    setTermInsuranceAmount('');
+  };
+
   return (
     <>
       <header className="top-banner">
@@ -173,8 +194,8 @@ function App() {
 
                   <label>Or</label>
 
-                  <button className="custom-btn">
-                    Continue as guest
+                  <button className="custom-btn" onClick={handleClearAllData}>
+                    Clear All Data
                   </button>
                 </div>
               )}
