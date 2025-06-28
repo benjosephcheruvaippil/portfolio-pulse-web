@@ -138,17 +138,17 @@ function App() {
     setLocation('');
   };
 
-  function formatCurrency(value) {
-    if (!value) return '';
-    let number = Number(value.toString().replace(/[^0-9.]/g, ''));
-    if (isNaN(number)) return '';
-    if (location === 'India') {
-      return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(number);
-    } else if (location === 'US/Europe') {
-      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(number);
-    }
-    return value;
-  }
+  // function formatCurrency(value) {
+  //   if (!value) return '';
+  //   let number = Number(value.toString().replace(/[^0-9.]/g, ''));
+  //   if (isNaN(number)) return '';
+  //   if (location === 'India') {
+  //     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(number);
+  //   } else if (location === 'US/Europe') {
+  //     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(number);
+  //   }
+  //   return value;
+  // }
 
   function formatNumberWithCommas(value) {
     if (!value) return '';
@@ -319,6 +319,18 @@ function App() {
                       placeholder="Enter other expenses"
                       value={otherMonthlyExpenses}
                       onChange={e => { localStorage.setItem('otherMonthlyExpenses', e.target.value); setOtherMonthlyExpensesAmount(e.target.value); }}
+                        onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = otherMonthlyExpenses.replace(/,/g, '');
+                        setOtherMonthlyExpensesAmount(raw);
+                      }}
+                       onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(otherMonthlyExpenses);
+                        setOtherMonthlyExpensesAmount(formatted);
+                        localStorage.setItem('otherMonthlyExpenses', formatted);
+                      }}
+                      
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -329,6 +341,17 @@ function App() {
                       placeholder="Enter savings amount"
                       value={averageMonthlySavings}
                       onChange={e => { localStorage.setItem('averageMonthlySavings', e.target.value); setAverageMonthlySavingsAmount(e.target.value); }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = averageMonthlySavings.replace(/,/g, '');
+                        setAverageMonthlySavingsAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(averageMonthlySavings);
+                        setAverageMonthlySavingsAmount(formatted);
+                        localStorage.setItem('averageMonthlySavings', formatted);
+                      }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -359,6 +382,18 @@ function App() {
                       placeholder="Enter total liquid assets"
                       value={liquidAssets}
                       onChange={e => { localStorage.setItem('liquidAssets', e.target.value); setLiquidAssetsAmount(e.target.value); }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = liquidAssets.replace(/,/g, '');
+                        setLiquidAssetsAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(liquidAssets);
+                        setLiquidAssetsAmount(formatted);
+                        localStorage.setItem('liquidAssets', formatted);
+                      }}
+                      
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -369,6 +404,18 @@ function App() {
                       placeholder="Enter property/house assets value"
                       value={propertyAssets}
                       onChange={e => { localStorage.setItem('propertyAssets', e.target.value); setPropertyAssetsAmount(e.target.value); }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = propertyAssets.replace(/,/g, '');
+                        setPropertyAssetsAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(propertyAssets);
+                        setPropertyAssetsAmount(formatted);
+                        localStorage.setItem('propertyAssets', formatted);
+                      }}
+                      
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -393,6 +440,17 @@ function App() {
                       placeholder="Total Sum Insured"
                       value={healthInsurance}
                       onChange={e => { localStorage.setItem('healthInsurance', e.target.value); setHealthInsuranceAmount(e.target.value); }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = healthInsurance.replace(/,/g, '');
+                        setHealthInsuranceAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(healthInsurance);
+                        setHealthInsuranceAmount(formatted);
+                        localStorage.setItem('healthInsurance', formatted);
+                      }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
@@ -403,6 +461,17 @@ function App() {
                       placeholder="Totam Sum Assured"
                       value={termInsurance}
                       onChange={e => { localStorage.setItem('termInsurance', e.target.value); setTermInsuranceAmount(e.target.value); }}
+                      onFocus={e => {
+                        // Remove commas on focus for editing
+                        const raw = termInsurance.replace(/,/g, '');
+                        setTermInsuranceAmount(raw);
+                      }}
+                      onBlur={e => {
+                        // Add commas on blur
+                        const formatted = formatNumberWithCommas(termInsurance);
+                        setTermInsuranceAmount(formatted);
+                        localStorage.setItem('termInsurance', formatted);
+                      }}
                       style={{ padding: '8px', width: '100%' }}
                     />
                   </div>
