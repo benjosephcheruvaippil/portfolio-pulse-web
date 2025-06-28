@@ -223,7 +223,7 @@ function App() {
                         setLocation(e.target.value);
                         localStorage.setItem('location', e.target.value);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     >
                       <option value="">Select</option>
                       <option value="India">India</option>
@@ -240,7 +240,7 @@ function App() {
                         setAge(e.target.value);
                         localStorage.setItem('age', e.target.value);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <button className="custom-btn" onClick={handleContinue} disabled={loading}>
@@ -309,7 +309,7 @@ function App() {
                         setMonthlyEMIAmount(formatted);
                         localStorage.setItem('monthlyEMI', formatted);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <div>
@@ -331,7 +331,7 @@ function App() {
                         localStorage.setItem('otherMonthlyExpenses', formatted);
                       }}
                       
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <div>
@@ -352,7 +352,7 @@ function App() {
                         setAverageMonthlySavingsAmount(formatted);
                         localStorage.setItem('averageMonthlySavings', formatted);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <button
@@ -394,7 +394,7 @@ function App() {
                         localStorage.setItem('liquidAssets', formatted);
                       }}
                       
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <div>
@@ -416,7 +416,7 @@ function App() {
                         localStorage.setItem('propertyAssets', formatted);
                       }}
                       
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <button
@@ -451,7 +451,7 @@ function App() {
                         setHealthInsuranceAmount(formatted);
                         localStorage.setItem('healthInsurance', formatted);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <div>
@@ -472,7 +472,7 @@ function App() {
                         setTermInsuranceAmount(formatted);
                         localStorage.setItem('termInsurance', formatted);
                       }}
-                      style={{ padding: '8px', width: '100%' }}
+                      style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
                   <button
