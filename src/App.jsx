@@ -206,7 +206,7 @@ function App() {
                 //   return;
                 // }
                 // Prevent opening "Results" except via See Result! button
-                if (item.title === 'Results') {
+                if (item.title === 'Results' && openIndex !== idx) {
                   alert('Please click on "See Result!" under Insurance to view your financial health score.');
                   return;
                 }
@@ -490,12 +490,12 @@ function App() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '2em',
-                    marginTop: '1em',
+                    gap: '1em', // Reduced from 2em
+                    marginTop: '0.5em', // Reduced from 1em
                     maxWidth: 400,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    textAlign: 'center', // Center text
+                    textAlign: 'center',
                     marginLeft: 'auto',
                     marginRight: 'auto'
                   }}
@@ -507,24 +507,25 @@ function App() {
                       alignItems: 'center',
                       background: '#f5f8fa',
                       borderRadius: '1em',
-                      padding: '2em 1em',
+                      padding: '1em 0.5em', // Reduced padding
                       width: '100%',
                       boxShadow: '0 2px 8px rgba(44,62,80,0.08)'
                     }}
                   >
                     <span
                       style={{
-                        fontSize: '2.5rem',
+                        fontSize: '2rem', // Reduced from 2.5rem
                         fontWeight: 'bold',
                         color: '#0074d9',
-                        marginBottom: '0.5em'
+                        marginBottom: '0.3em' // Reduced
                       }}
                     >
-                      {financialHealthScore}<span style={{ fontSize: '1.2rem', color: '#888' }}>/100</span>
+                      {financialHealthScore}
+                      <span style={{ fontSize: '1rem', color: '#888' }}>/100</span>
                     </span>
                     <span
                       style={{
-                        fontSize: '1.1rem',
+                        fontSize: '1rem', // Reduced from 1.1rem
                         color: '#222',
                         fontWeight: 500
                       }}
@@ -537,11 +538,11 @@ function App() {
                       background: '#fffbe6',
                       borderLeft: '4px solid #ffb400',
                       borderRadius: '0.5em',
-                      padding: '1em',
+                      padding: '0.7em', // Reduced padding
                       width: '100%',
-                      fontSize: '1rem',
+                      fontSize: '0.95rem', // Slightly reduced
                       color: '#444',
-                      textAlign: 'center' // Center text in summary
+                      textAlign: 'center'
                     }}
                   >
                     <strong>Summary:</strong> {resultMessage}
