@@ -200,12 +200,15 @@ function App() {
   }
 
   useEffect(() => {
-    // Simulate loading for 1 second or until your API call is done
-    const timer = setTimeout(() => setInitialLoading(false), 1000);
+    // Only show loader if loading takes longer than 300ms
+    const showLoaderTimeout = setTimeout(() => setInitialLoading(true), 300);
+    // Simulate loading or wait for your API/data
+    const hideLoaderTimeout = setTimeout(() => setInitialLoading(false), 1000);
 
-    // If you want to wait for your API call, move setInitialLoading(false) to your .then() callback
-
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(showLoaderTimeout);
+      clearTimeout(hideLoaderTimeout);
+    };
   }, []);
 
   if (initialLoading) return <Loader />;
