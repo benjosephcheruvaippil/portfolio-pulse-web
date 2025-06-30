@@ -86,6 +86,9 @@ function App() {
   }
 
   const handleSeeResult = () => {
+    setLoading(true);
+    const startTime = Date.now();
+
     fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/calculateResult', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -104,15 +107,25 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        // Handle the API response if needed
-        setFinancialHealthScore(data.financialHealthScore);
-        setResultMessage(data.message);
-        setOpenIndex(4); // Open the Results accordion
+        const elapsed = Date.now() - startTime;
+        const minDelay = 2000;
+        const wait = elapsed < minDelay ? minDelay - elapsed : 0;
+        setTimeout(() => {
+          setFinancialHealthScore(data.financialHealthScore);
+          setResultMessage(data.message);
+          setOpenIndex(4); // Open the Results accordion
+          setLoading(false);
+        }, wait);
       })
       .catch(error => {
-        // Handle errors if needed
-        console.error('Error calling results API:', error);
-        setOpenIndex(4); // Still open Results accordion on error
+        const elapsed = Date.now() - startTime;
+        const minDelay = 2000;
+        const wait = elapsed < minDelay ? minDelay - elapsed : 0;
+        setTimeout(() => {
+          console.error('Error calling results API:', error);
+          setOpenIndex(4);
+          setLoading(false);
+        }, wait);
       });
   };
 
@@ -211,7 +224,7 @@ function App() {
     };
   }, []);
 
-  if (initialLoading) return <Loader />;
+  if (initialLoading || loading) return <Loader />;
 
   return (
     <>
