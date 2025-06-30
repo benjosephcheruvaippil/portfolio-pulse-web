@@ -42,6 +42,7 @@ function App() {
   const [resultMessage, setResultMessage] = useState('');
   const [location, setLocation] = useState(localStorage.getItem('location') || '');
   const [initialLoading, setInitialLoading] = useState(true);
+  const [bottomMessage, setBottomMessage] = useState('');
 
   const items = [
     { title: 'Personal Details', icon: <FaUser />, content: '' },
@@ -51,6 +52,11 @@ function App() {
     { title: 'Insurance', icon: <FaShieldAlt />, content: '' },
     { title: 'Results', icon: <FaCheckCircle />, content: '' }
   ]
+
+  function showBottomMessage(msg) {
+    setBottomMessage(msg);
+    setTimeout(() => setBottomMessage(''), 2500);
+  }
 
   // Call POST API on page load
   useEffect(() => {
@@ -256,7 +262,7 @@ function App() {
                 // }
                 // Prevent opening "Results" except via See Result! button
                 if (item.title === 'Results' && openIndex !== idx) {
-                  alert('Please click on "See Result!" under Insurance to view your financial health score.');
+                  showBottomMessage('Under "Insurance" please click on "See Result!" button to view your financial health score.');
                   return;
                 }
                 setOpenIndex(openIndex === idx ? null : idx);
@@ -368,18 +374,18 @@ function App() {
                       placeholder="Enter other expenses"
                       value={otherMonthlyExpenses}
                       onChange={e => { localStorage.setItem('otherMonthlyExpenses', e.target.value); setOtherMonthlyExpensesAmount(e.target.value); }}
-                        onFocus={e => {
+                      onFocus={e => {
                         // Remove commas on focus for editing
                         const raw = otherMonthlyExpenses.replace(/,/g, '');
                         setOtherMonthlyExpensesAmount(raw);
                       }}
-                       onBlur={e => {
+                      onBlur={e => {
                         // Add commas on blur
                         const formatted = formatNumberWithCommas(otherMonthlyExpenses);
                         setOtherMonthlyExpensesAmount(formatted);
                         localStorage.setItem('otherMonthlyExpenses', formatted);
                       }}
-                      
+
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -442,7 +448,7 @@ function App() {
                         setLiquidAssetsAmount(formatted);
                         localStorage.setItem('liquidAssets', formatted);
                       }}
-                      
+
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -464,7 +470,7 @@ function App() {
                         setPropertyAssetsAmount(formatted);
                         localStorage.setItem('propertyAssets', formatted);
                       }}
-                      
+
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -617,6 +623,29 @@ function App() {
           </a>
         </footer>
       </div>
+      {bottomMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            bottom: 20,
+            margin: '0 auto',
+            width: 'fit-content',
+            background: '#ffb400', // bright yellow-orange
+            color: '#222',         // dark text for contrast
+            padding: '0.8em 2em',
+            borderRadius: '2em',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+            zIndex: 99999,
+            fontSize: '1rem',
+            textAlign: 'center',
+            transition: 'opacity 0.3s'
+          }}
+        >
+          {bottomMessage}
+        </div>
+      )}
     </>
   )
 }
