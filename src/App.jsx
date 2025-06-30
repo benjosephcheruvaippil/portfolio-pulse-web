@@ -41,6 +41,7 @@ function App() {
   const [financialHealthScore, setFinancialHealthScore] = useState(null);
   const [resultMessage, setResultMessage] = useState('');
   const [location, setLocation] = useState(localStorage.getItem('location') || '');
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const items = [
     { title: 'Personal Details', icon: <FaUser />, content: '' },
@@ -176,6 +177,38 @@ function App() {
     }
     return number;
   }
+
+  function Loader() {
+    return (
+      <div style={{
+        position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+        background: 'rgba(255,255,255,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999
+      }}>
+        <div className="spinner" style={{
+          border: '6px solid #f3f3f3',
+          borderTop: '6px solid #0074d9',
+          borderRadius: '50%',
+          width: 48,
+          height: 48,
+          animation: 'spin 1s linear infinite'
+        }} />
+        <style>
+          {`@keyframes spin { 100% { transform: rotate(360deg); } }`}
+        </style>
+      </div>
+    );
+  }
+
+  useEffect(() => {
+    // Simulate loading for 1 second or until your API call is done
+    const timer = setTimeout(() => setInitialLoading(false), 1000);
+
+    // If you want to wait for your API call, move setInitialLoading(false) to your .then() callback
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (initialLoading) return <Loader />;
 
   return (
     <>
