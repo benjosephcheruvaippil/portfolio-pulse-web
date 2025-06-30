@@ -55,7 +55,7 @@ function App() {
 
   function showBottomMessage(msg) {
     setBottomMessage(msg);
-    setTimeout(() => setBottomMessage(''), 4000);
+    setTimeout(() => setBottomMessage(''), 4500);
   }
 
   // Call POST API on page load
@@ -93,6 +93,7 @@ function App() {
 
   const handleSeeResult = () => {
     setLoading(true);
+    setOpenIndex(4); // Open Results accordion immediately so loader is visible
     const startTime = Date.now();
 
     fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/calculateResult', {
@@ -119,7 +120,6 @@ function App() {
         setTimeout(() => {
           setFinancialHealthScore(data.financialHealthScore);
           setResultMessage(data.message);
-          setOpenIndex(4); // Open the Results accordion
           setLoading(false);
         }, wait);
       })
@@ -129,7 +129,6 @@ function App() {
         const wait = elapsed < minDelay ? minDelay - elapsed : 0;
         setTimeout(() => {
           console.error('Error calling results API:', error);
-          setOpenIndex(4);
           setLoading(false);
         }, wait);
       });
@@ -230,7 +229,7 @@ function App() {
     };
   }, []);
 
-  if (initialLoading || loading) return <Loader />;
+  if (initialLoading) return <Loader />;
 
   return (
     <>
@@ -545,8 +544,8 @@ function App() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '1em', // Reduced from 2em
-                    marginTop: '0.5em', // Reduced from 1em
+                    gap: '1em',
+                    marginTop: '0.5em',
                     maxWidth: 400,
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -555,53 +554,79 @@ function App() {
                     marginRight: 'auto'
                   }}
                 >
-                  <div
-                    style={{
+                  {loading ? (
+                    // Inline loader for Results accordion
+                    <div style={{
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-                      background: '#f5f8fa',
-                      borderRadius: '1em',
-                      padding: '1em 0.5em', // Reduced padding
-                      width: '100%',
-                      boxShadow: '0 2px 8px rgba(44,62,80,0.08)'
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: '2rem', // Reduced from 2.5rem
-                        fontWeight: 'bold',
-                        color: '#0074d9',
-                        marginBottom: '0.3em' // Reduced
-                      }}
-                    >
-                      {financialHealthScore}
-                      <span style={{ fontSize: '1rem', color: '#888' }}>/100</span>
-                    </span>
-                    <span
-                      style={{
-                        fontSize: '1rem', // Reduced from 1.1rem
-                        color: '#222',
-                        fontWeight: 500
-                      }}
-                    >
-                      Your Financial Health Score
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      background: '#fffbe6',
-                      borderLeft: '4px solid #ffb400',
-                      borderRadius: '0.5em',
-                      padding: '0.7em', // Reduced padding
-                      width: '100%',
-                      fontSize: '0.95rem', // Slightly reduced
-                      color: '#444',
-                      textAlign: 'center'
-                    }}
-                  >
-                    <strong>Summary:</strong> {resultMessage}
-                  </div>
+                      justifyContent: 'center',
+                      minHeight: 180
+                    }}>
+                      <div className="spinner" style={{
+                        border: '6px solid #f3f3f3',
+                        borderTop: '6px solid #0074d9',
+                        borderRadius: '50%',
+                        width: 48,
+                        height: 48,
+                        animation: 'spin 1s linear infinite'
+                      }} />
+                      <style>
+                        {`@keyframes spin { 100% { transform: rotate(360deg); } }`}
+                      </style>
+                      <div style={{ marginTop: 16, color: '#0074d9', fontWeight: 500 }}>Calculating your score...</div>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          background: '#f5f8fa',
+                          borderRadius: '1em',
+                          padding: '1em 0.5em',
+                          width: '100%',
+                          boxShadow: '0 2px 8px rgba(44,62,80,0.08)'
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: '2rem',
+                            fontWeight: 'bold',
+                            color: '#0074d9',
+                            marginBottom: '0.3em'
+                          }}
+                        >
+                          {financialHealthScore}
+                          <span style={{ fontSize: '1rem', color: '#888' }}>/100</span>
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '1rem',
+                            color: '#222',
+                            fontWeight: 500
+                          }}
+                        >
+                          Your Financial Health Score
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          background: '#fffbe6',
+                          borderLeft: '4px solid #ffb400',
+                          borderRadius: '0.5em',
+                          padding: '0.7em',
+                          width: '100%',
+                          fontSize: '0.95rem',
+                          color: '#444',
+                          textAlign: 'center'
+                        }}
+                      >
+                        <strong>Summary:</strong> {resultMessage}
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </AccordionItem>
