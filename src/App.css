@@ -133,7 +133,7 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  padding: 1rem 0;
+  padding: 0.3rem 0;
   letter-spacing: 2px;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
   z-index: 1000;
@@ -141,7 +141,7 @@ body {
 
 .main-scroll-area {
   position: absolute;
-  top: 0;
+  top: -25px;
   left: 0;
   width: 100%;
   /* Height = 100% - banner height (adjust as needed) */

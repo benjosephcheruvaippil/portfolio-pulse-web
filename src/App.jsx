@@ -239,7 +239,7 @@ function App() {
       </header>
       <div className="main-scroll-area">
         <div className="tagline">
-          Do a financial health checkup!
+          Get your financial health checkup done in 4 steps!
         </div>
         <div className="accordion">
           {items.map((item, idx) => (
