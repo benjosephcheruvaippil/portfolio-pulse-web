@@ -55,7 +55,7 @@ function App() {
 
   function showBottomMessage(msg) {
     setBottomMessage(msg);
-    setTimeout(() => setBottomMessage(''), 2500);
+    setTimeout(() => setBottomMessage(''), 4000);
   }
 
   // Call POST API on page load
