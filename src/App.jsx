@@ -66,6 +66,7 @@ function App() {
       body: JSON.stringify({
         emailId: 'page_load',
         fullName: '',
+        clientUrl: window.location.href
       }),
     })
     // No need to handle response if you want "fire and forget"
@@ -109,7 +110,8 @@ function App() {
         liquidAssetsValue: Number(liquidAssets.replace(/,/g, '')),
         realEstateValue: Number(propertyAssets.replace(/,/g, '')),
         healthInsuranceCoverageValue: Number(healthInsurance.replace(/,/g, '')),
-        termInsuranceValue: Number(termInsurance.replace(/,/g, ''))
+        termInsuranceValue: Number(termInsurance.replace(/,/g, '')),
+        clientUrl: window.location.href
       }),
     })
       .then(response => response.json())
