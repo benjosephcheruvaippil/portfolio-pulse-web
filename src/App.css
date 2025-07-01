@@ -134,9 +134,10 @@ body {
   font-weight: bold;
   text-align: center;
   padding: 0.3rem 0;
-  letter-spacing: 2px;
+  letter-spacing: -1px;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
   z-index: 1000;
+  font-family: cursive;
 }
 
 .main-scroll-area {
