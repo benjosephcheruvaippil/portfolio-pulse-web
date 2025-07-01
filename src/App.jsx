@@ -40,7 +40,7 @@ function App() {
   const [success, setSuccess] = useState(false)
   const [financialHealthScore, setFinancialHealthScore] = useState(null);
   const [resultMessage, setResultMessage] = useState('');
-  const [location, setLocation] = useState(localStorage.getItem('location') || '');
+  const [location, setLocation] = useState(localStorage.getItem('location') || 'India');
   const [initialLoading, setInitialLoading] = useState(true);
   const [bottomMessage, setBottomMessage] = useState('');
 
@@ -391,7 +391,7 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Average monthly savings</label>
+                    <label>Average Monthly Savings</label>
                     <input
                       type="text"
                       placeholder="Enter savings amount"
@@ -425,7 +425,7 @@ function App() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2em', marginTop: '1em', maxWidth: 400 }}>
                   <div style={{ position: 'relative' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-                      Total Liquid Assets value
+                      Total Liquid Assets Value
                       <span className="info-icon" tabIndex={0}>
                         <FaInfoCircle />
                         <span className="tooltip">
@@ -454,7 +454,7 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Property/House assets value</label>
+                    <label>Property/House Assets Value</label>
                     <input
                       type="text"
                       placeholder="Enter property/house assets value"
@@ -493,7 +493,7 @@ function App() {
                     </label>
                     <input
                       type="text"
-                      placeholder="Total Sum Insured"
+                      placeholder="Sum Insured"
                       value={healthInsurance}
                       onChange={e => { localStorage.setItem('healthInsurance', e.target.value); setHealthInsuranceAmount(e.target.value); }}
                       onFocus={e => {
@@ -514,7 +514,7 @@ function App() {
                     <label>Term Insurance Coverage</label>
                     <input
                       type="text"
-                      placeholder="Totam Sum Assured"
+                      placeholder="Sum Assured"
                       value={termInsurance}
                       onChange={e => { localStorage.setItem('termInsurance', e.target.value); setTermInsuranceAmount(e.target.value); }}
                       onFocus={e => {
