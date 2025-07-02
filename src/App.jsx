@@ -612,6 +612,32 @@ function App() {
                         >
                           Your Financial Health Score
                         </span>
+                        {/* Indicator below the label */}
+                        {financialHealthScore !== null && (
+                          <span style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            marginTop: '0.5em',
+                            fontWeight: 600,
+                            fontSize: '1.1em'
+                          }}>
+                            {financialHealthScore < 50 && (
+                              <span style={{ color: '#ff4d4f', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="not good">😟</span> Needs Improvement
+                              </span>
+                            )}
+                            {financialHealthScore >= 50 && financialHealthScore <= 70 && (
+                              <span style={{ color: '#ffb400', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="good">🙂</span> Good
+                              </span>
+                            )}
+                            {financialHealthScore > 70 && (
+                              <span style={{ color: '#52c41a', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="impressive">😃</span> Impressive
+                              </span>
+                            )}
+                          </span>
+                        )}
                       </div>
                       <div
                         style={{
