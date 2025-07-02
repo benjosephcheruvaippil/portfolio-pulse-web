@@ -296,17 +296,17 @@ function App() {
                         setAge(e.target.value);
                         localStorage.setItem('age', e.target.value);
                       }}
-                      style={{ padding: '8px', width: '95%' }}
+                      style={{ padding: '8px', width: '86%' }}
                     />
                   </div>
-                  <button className="custom-btn" onClick={handleContinue} disabled={loading}>
+                  <button style={{ width: '48%' }} className="custom-btn" onClick={handleContinue} disabled={loading}>
                     {loading ? 'Saving...' : 'Continue'}
                   </button>
                   {error && <span style={{ color: 'red' }}>{error}</span>}
                   {success && <span style={{ color: 'green' }}>{success}</span>}
-                  <label style={{ marginTop: '1em' }}>Or</label>
-                  <button className="custom-btn" onClick={handleClearAllData}>
-                    Clear All Data
+                  {/* <label style={{ marginTop: '1em' }}>Or</label> */}
+                  <button style={{ width: '48%' }} className="custom-btn" onClick={handleClearAllData}>
+                    Reset
                   </button>
                 </div>
               )}
