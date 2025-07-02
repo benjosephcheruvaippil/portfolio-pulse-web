@@ -296,17 +296,17 @@ function App() {
                         setAge(e.target.value);
                         localStorage.setItem('age', e.target.value);
                       }}
-                      style={{ padding: '8px', width: '95%' }}
+                      style={{ padding: '8px', width: '86%' }}
                     />
                   </div>
-                  <button className="custom-btn" onClick={handleContinue} disabled={loading}>
+                  <button style={{ width: '48%' }} className="custom-btn" onClick={handleContinue} disabled={loading}>
                     {loading ? 'Saving...' : 'Continue'}
                   </button>
                   {error && <span style={{ color: 'red' }}>{error}</span>}
                   {success && <span style={{ color: 'green' }}>{success}</span>}
-                  <label style={{ marginTop: '1em' }}>Or</label>
-                  <button className="custom-btn" onClick={handleClearAllData}>
-                    Clear All Data
+                  {/* <label style={{ marginTop: '1em' }}>Or</label> */}
+                  <button style={{ width: '48%' }} className="custom-btn" onClick={handleClearAllData}>
+                    Reset
                   </button>
                 </div>
               )}
@@ -612,6 +612,32 @@ function App() {
                         >
                           Your Financial Health Score
                         </span>
+                        {/* Indicator below the label */}
+                        {financialHealthScore !== null && (
+                          <span style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            marginTop: '0.5em',
+                            fontWeight: 600,
+                            fontSize: '1.1em'
+                          }}>
+                            {financialHealthScore < 50 && (
+                              <span style={{ color: '#ff4d4f', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="not good">😟</span> Needs Improvement
+                              </span>
+                            )}
+                            {financialHealthScore >= 50 && financialHealthScore <= 70 && (
+                              <span style={{ color: '#ffb400', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="good">🙂</span> Good
+                              </span>
+                            )}
+                            {financialHealthScore > 70 && (
+                              <span style={{ color: '#52c41a', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="impressive">😃</span> Impressive
+                              </span>
+                            )}
+                          </span>
+                        )}
                       </div>
                       <div
                         style={{
