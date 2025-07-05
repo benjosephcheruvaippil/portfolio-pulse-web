@@ -60,7 +60,7 @@ function App() {
 
   // Call POST API on page load
   useEffect(() => {
-    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/saveUserInfo', {
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -648,10 +648,18 @@ function App() {
                           width: '100%',
                           fontSize: '0.95rem',
                           color: '#444',
-                          textAlign: 'center'
+                          textAlign: 'left'
                         }}
                       >
-                        <strong>Summary:</strong> {resultMessage}
+                        <strong>Summary:</strong>
+                        <ul style={{ margin: '0.5em 0 0 1.2em', padding: 0 }}>
+                          {resultMessage
+                            .split('\n')
+                            .filter(line => line.trim() !== '')
+                            .map((line, idx) => (
+                              <li key={idx} style={{ marginBottom: '0.3em' }}>{line.trim()}</li>
+                            ))}
+                        </ul>
                       </div>
                     </>
                   )}
