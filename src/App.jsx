@@ -60,7 +60,7 @@ function App() {
 
   // Call POST API on page load
   useEffect(() => {
-    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/saveUserInfo', {
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/event', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
