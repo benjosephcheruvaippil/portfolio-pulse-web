@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
+import logo from './assets/Portfolio-Pulse-Logo-New.png';
 
 function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
@@ -235,8 +236,12 @@ function App() {
 
   return (
     <>
-      <header className="top-banner">
-        Portfolio Pulse
+      <header className="top-banner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4px 0' }}>
+        <img
+          src={logo}
+          alt="Portfolio Pulse Logo"
+          style={{ height: 54, maxWidth: 257, width: '30%' }}
+        />
       </header>
       <div className="main-scroll-area">
         <div className="tagline">

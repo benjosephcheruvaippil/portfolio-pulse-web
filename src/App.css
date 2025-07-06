@@ -128,7 +128,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background: #2d3e50;
+  background: rgb(227, 210, 210);
   color: #fff;
   font-size: 2rem;
   font-weight: bold;
@@ -138,6 +138,21 @@ body {
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
   z-index: 1000;
   font-family: cursive;
+}
+
+.top-banner img {
+  width: 30%;
+  max-width: 257px;
+  height: 54px;
+  /* object-fit: contain; */
+}
+
+@media (max-width: 700px) {
+  .top-banner img {
+    max-width: 90vw;
+    min-width: 220px;
+    height: 48px;
+  }
 }
 
 .main-scroll-area {
