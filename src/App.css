@@ -140,6 +140,21 @@ body {
   font-family: cursive;
 }
 
+.top-banner img {
+  width: 30%;
+  max-width: 257px;
+  height: 54px;
+  /* object-fit: contain; */
+}
+
+@media (max-width: 700px) {
+  .top-banner img {
+    max-width: 90vw;
+    min-width: 220px;
+    height: 48px;
+  }
+}
+
 .main-scroll-area {
   position: absolute;
   top: -25px;
