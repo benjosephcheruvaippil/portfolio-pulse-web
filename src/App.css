@@ -128,7 +128,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background: #2d3e50;
+  background: rgb(227, 210, 210);
   color: #fff;
   font-size: 2rem;
   font-weight: bold;
