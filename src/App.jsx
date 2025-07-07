@@ -590,7 +590,7 @@ function App() {
                           display: 'flex',
                           flexDirection: 'column',
                           alignItems: 'center',
-                          background: '#f5f8fa',
+                          background: '#E8EEF2',
                           borderRadius: '1em',
                           padding: '1em 0.5em',
                           width: '100%',

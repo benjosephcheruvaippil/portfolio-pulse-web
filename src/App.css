@@ -90,7 +90,8 @@ body {
   margin: 0;
   padding: 16px;
   border: none;
-  background: #eee;
+  /* background: #eee; */
+  background: #E9F2FF;
   font-size: 1rem;
   cursor: pointer;
   color: #222; /* Added color property */
@@ -110,7 +111,8 @@ body {
 
 .custom-btn {
   padding: 8px 16px;
-  background: #e0e7ef;
+  /* background: #e0e7ef; */
+  background: #B6D5FF;
   border: 1px solid #bfcad6;
   border-radius: 4px;
   color: #222;
@@ -128,7 +130,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background: #ADD8E6;
+  /* background: #ADD8E6; */
+  background: #B6D5FF;
   color: #fff;
   font-size: 2rem;
   font-weight: bold;
