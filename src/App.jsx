@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
-import logo from './assets/Portfolio-Pulse-Logo-New.png';
+import logo from '/Portfolio-Pulse-Logo-New.png';
+import { Helmet } from "react-helmet";
 
 function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
@@ -236,6 +237,14 @@ function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Financial Health Checkup</title>
+        <meta name="description" content="Get your financial health checkup done in 4 easy steps. Know your financial health score and get personalized recommendations." />
+        <meta name="keywords" content="financial health, net worth, savings, investments, insurance, financial planning" />
+        <meta name="author" content="Portfolio Pulse" />
+        <link rel="icon" href="/Portfolio-Pulse-Logo-New.png" />
+        {/* Add any other head elements here */}
+      </Helmet>
       <header className="top-banner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4px 0' }}>
         <img
           src={logo}
