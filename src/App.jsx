@@ -400,7 +400,15 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Average Monthly Savings</label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                      Average Monthly Savings
+                      <span className="info-icon" tabIndex={0}>
+                        <FaInfoCircle />
+                        <span className="tooltip">
+                          Includes the amount you save monthly for SIPs, RDs, and other regular investments.
+                        </span>
+                      </span>
+                    </label>
                     <input
                       type="text"
                       placeholder="Enter savings amount"
@@ -438,7 +446,7 @@ function App() {
                       <span className="info-icon" tabIndex={0}>
                         <FaInfoCircle />
                         <span className="tooltip">
-                          This includes cash deposits, mutual funds, stocks, bonds, gold, etc.(Assets that can be converted to cash typically in less than a week)
+                          Includes the total of cash/fixed deposits, mutual funds, stocks, bonds, gold, and other assets that can typically be converted to cash within a week.
                         </span>
                       </span>
                     </label>
@@ -520,7 +528,15 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Term Insurance Coverage</label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                      Term Insurance Coverage
+                      <span className="info-icon" tabIndex={0}>
+                        <FaInfoCircle />
+                        <span className="tooltip">
+                          The total amount your family will receive if you pass away before age 65, typically covered under term insurance.
+                        </span>
+                      </span>
+                    </label>
                     <input
                       type="text"
                       placeholder="Sum Assured"
