@@ -298,9 +298,13 @@ function App() {
                       placeholder="Please enter your age"
                       value={age}
                       onChange={e => {
-                        setAge(e.target.value);
-                        localStorage.setItem('age', e.target.value);
+                        // Allow only positive integers, no decimals
+                        const val = e.target.value.replace(/[^0-9]/g, '');
+                        localStorage.setItem('age', val);
+                        setAge(val);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '86%' }}
                     />
                   </div>
