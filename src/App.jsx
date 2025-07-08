@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
-import logo from './assets/Portfolio-Pulse-Logo-New.png';
+import logo from '/Portfolio-Pulse-Logo-New.png';
+import { Helmet } from "react-helmet";
 
 function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
@@ -236,6 +237,14 @@ function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Financial Health Checkup</title>
+        <meta name="description" content="Get your financial health checkup done in 4 easy steps. Know your financial health score and get personalized recommendations." />
+        <meta name="keywords" content="financial health, net worth, savings, investments, insurance, financial planning" />
+        <meta name="author" content="Portfolio Pulse" />
+        <link rel="icon" href="/Portfolio-Pulse-Logo-New.png" />
+        {/* Add any other head elements here */}
+      </Helmet>
       <header className="top-banner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4px 0' }}>
         <img
           src={logo}
@@ -400,7 +409,15 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Average Monthly Savings</label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                      Average Monthly Savings
+                      <span className="info-icon" tabIndex={0}>
+                        <FaInfoCircle />
+                        <span className="tooltip">
+                          Includes the amount you save monthly for SIPs, RDs, and other regular investments.
+                        </span>
+                      </span>
+                    </label>
                     <input
                       type="text"
                       placeholder="Enter savings amount"
@@ -438,7 +455,7 @@ function App() {
                       <span className="info-icon" tabIndex={0}>
                         <FaInfoCircle />
                         <span className="tooltip">
-                          This includes cash deposits, mutual funds, stocks, bonds, gold, etc.(Assets that can be converted to cash typically in less than a week)
+                          Includes the total of cash/fixed deposits, mutual funds, stocks, bonds, gold, and other assets that can typically be converted to cash within a week.
                         </span>
                       </span>
                     </label>
@@ -520,7 +537,15 @@ function App() {
                     />
                   </div>
                   <div>
-                    <label>Term Insurance Coverage</label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                      Term Insurance Coverage
+                      <span className="info-icon" tabIndex={0}>
+                        <FaInfoCircle />
+                        <span className="tooltip">
+                          The total amount your family will receive if you pass away before age 65, typically covered under term insurance.
+                        </span>
+                      </span>
+                    </label>
                     <input
                       type="text"
                       placeholder="Sum Assured"
