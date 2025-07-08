@@ -191,7 +191,7 @@ function App() {
         formatted += '.' + parts[1];
       }
       return formatted;
-    } else if (location === 'US/Europe') {
+    } else if (location === 'US/Europe' || location === 'Others') {
       // US/Europe numbering system
       const parts = number.split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -298,6 +298,7 @@ function App() {
                       <option value="">Select</option>
                       <option value="India">India</option>
                       <option value="US/Europe">US/Europe</option>
+                      <option value="Others">Others</option>
                     </select>
                   </div>
                   <div style={{ width: '50%' }}>
@@ -383,6 +384,8 @@ function App() {
                         setMonthlyEMIAmount(formatted);
                         localStorage.setItem('monthlyEMI', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -404,7 +407,8 @@ function App() {
                         setOtherMonthlyExpensesAmount(formatted);
                         localStorage.setItem('otherMonthlyExpenses', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -434,6 +438,8 @@ function App() {
                         setAverageMonthlySavingsAmount(formatted);
                         localStorage.setItem('averageMonthlySavings', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -475,7 +481,8 @@ function App() {
                         setLiquidAssetsAmount(formatted);
                         localStorage.setItem('liquidAssets', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -497,7 +504,8 @@ function App() {
                         setPropertyAssetsAmount(formatted);
                         localStorage.setItem('propertyAssets', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -533,6 +541,8 @@ function App() {
                         setHealthInsuranceAmount(formatted);
                         localStorage.setItem('healthInsurance', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -562,6 +572,8 @@ function App() {
                         setTermInsuranceAmount(formatted);
                         localStorage.setItem('termInsurance', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
