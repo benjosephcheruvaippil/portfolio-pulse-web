@@ -407,7 +407,8 @@ function App() {
                         setOtherMonthlyExpensesAmount(formatted);
                         localStorage.setItem('otherMonthlyExpenses', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -437,6 +438,8 @@ function App() {
                         setAverageMonthlySavingsAmount(formatted);
                         localStorage.setItem('averageMonthlySavings', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -478,7 +481,8 @@ function App() {
                         setLiquidAssetsAmount(formatted);
                         localStorage.setItem('liquidAssets', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -500,7 +504,8 @@ function App() {
                         setPropertyAssetsAmount(formatted);
                         localStorage.setItem('propertyAssets', formatted);
                       }}
-
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -536,6 +541,8 @@ function App() {
                         setHealthInsuranceAmount(formatted);
                         localStorage.setItem('healthInsurance', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
@@ -565,6 +572,8 @@ function App() {
                         setTermInsuranceAmount(formatted);
                         localStorage.setItem('termInsurance', formatted);
                       }}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       style={{ padding: '8px', width: '95%' }}
                     />
                   </div>
