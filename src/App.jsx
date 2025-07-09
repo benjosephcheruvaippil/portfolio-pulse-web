@@ -3,6 +3,7 @@ import './App.css'
 import { FaUser, FaMoneyBillWave, FaWallet, FaChartLine, FaShieldAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 import logo from '/Portfolio-Pulse-Logo-New.png';
 import { Helmet } from "react-helmet";
+import FeedbackPopup from './FeedbackPopup';
 
 function AccordionItem({ title, icon, content, isOpen, onClick, children }) {
   return (
@@ -59,6 +60,24 @@ function App() {
     setBottomMessage(msg);
     setTimeout(() => setBottomMessage(''), 4500);
   }
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleFeedbackSubmit = (feedback) => {
+
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userFeedback: feedback,
+        clientUrl: window.location.href
+      })
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error calling results API:', error);
+      });
+  };
 
   // Call POST API on page load
   useEffect(() => {
@@ -715,6 +734,17 @@ function App() {
           ))}
         </div>
         <footer className="footer">
+          <div style={{ padding: '10px' }}>
+            <button className="feedback-button" onClick={() => setShowPopup(true)}>
+              📝 Give Feedback
+            </button>
+
+            <FeedbackPopup
+              isOpen={showPopup}
+              onClose={() => setShowPopup(false)}
+              onSubmit={handleFeedbackSubmit}
+            />
+          </div>
           <a
             href="https://play.google.com/store/apps/details?id=com.companyname.assetmanagement"
             target="_blank"
