@@ -743,9 +743,11 @@ function App() {
               isOpen={showPopup}
               onClose={() => {
                 setShowPopup(false);
+              }}
+              onSubmit={(feedback)=>{
+                handleFeedbackSubmit(feedback);
                 showBottomMessage('Appreciate your feedback!');
               }}
-              onSubmit={handleFeedbackSubmit}
             />
           </div>
           <a
