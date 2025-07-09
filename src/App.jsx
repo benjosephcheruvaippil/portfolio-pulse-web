@@ -64,8 +64,19 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleFeedbackSubmit = (feedback) => {
-    console.log('User feedback:', feedback);
-    // TODO: Send to API or store locally
+
+    fetch('https://networthtrackerapi20240213185304.azurewebsites.net/api/General/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userFeedback: feedback,
+        clientUrl: window.location.href
+      })
+    })
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error calling results API:', error);
+      });
   };
 
   // Call POST API on page load
