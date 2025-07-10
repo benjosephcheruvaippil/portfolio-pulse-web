@@ -24,7 +24,7 @@ const FeedbackPopup = ({ isOpen, onClose, onSubmit }) => {
         />
         <div className="popup-buttons">
           <button className="cancel-btn" onClick={onClose}>Cancel</button>
-          <button className="submit-btn" onClick={handleSubmit}>Submit</button>
+          <button className="submit-btn" disabled={!feedback.trim()} onClick={handleSubmit}>Submit</button>
         </div>
       </div>
     </div>
