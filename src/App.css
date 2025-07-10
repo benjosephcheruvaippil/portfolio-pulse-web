@@ -165,7 +165,7 @@ body {
   left: 0;
   width: 100%;
   /* Height = 100% - banner height (adjust as needed) */
-  height: 100vh;
+  height: 100%;
   padding-top: 4.5rem; /* Same as .top-banner height */
   overflow-y: auto;
   box-sizing: border-box;
