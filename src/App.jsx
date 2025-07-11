@@ -691,14 +691,19 @@ function App() {
                                 <span role="img" aria-label="not good">😟</span> Needs Improvement
                               </span>
                             )}
-                            {financialHealthScore >= 50 && financialHealthScore <= 70 && (
+                            {financialHealthScore >= 50 && financialHealthScore <= 60 && (
+                              <span style={{ color: '#ffb400', display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <span role="img" aria-label="good">😐</span> Fair
+                              </span>
+                            )}
+                            {financialHealthScore > 60 && financialHealthScore <= 70 && (
                               <span style={{ color: '#ffb400', display: 'flex', alignItems: 'center', gap: 1 }}>
                                 <span role="img" aria-label="good">🙂</span> Good
                               </span>
                             )}
                             {financialHealthScore > 70 && (
                               <span style={{ color: '#52c41a', display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <span role="img" aria-label="impressive">😃</span> Impressive
+                                <span role="img" aria-label="impressive">😄</span> Very Good
                               </span>
                             )}
                           </span>
